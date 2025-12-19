@@ -15,8 +15,9 @@ import ProfilePage from './pages/ProfilePage';
 // Buyer Pages
 import BuyerDashboard from './pages/buyer/BuyerDashboard';
 import BrowseProducts from './pages/buyer/BrowseProducts';
+import ProductDetailPage from './pages/buyer/ProductDetailPage';
 import MyOrders from './pages/buyer/MyOrders';
-import BuyerOrderDetails from './pages/buyer/OrderDetails';
+import OrderDetails from './pages/buyer/OrderDetails';
 
 // Farmer Pages
 import FarmerDashboard from './pages/farmer/FarmerDashboard';
@@ -42,8 +43,9 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/products" element={<BrowseProducts />} />
+              <Route path="/products/:id" element={<ProductDetailPage />} />
 
-              {/* Profile Route - Available to all authenticated users */}
+              {/* Profile Route - Protected for both roles */}
               <Route
                 path="/profile"
                 element={
@@ -74,7 +76,7 @@ function App() {
                 path="/buyer/orders/:id"
                 element={
                   <ProtectedRoute requiredRole="BUYER">
-                    <BuyerOrderDetails />
+                    <OrderDetails />
                   </ProtectedRoute>
                 }
               />

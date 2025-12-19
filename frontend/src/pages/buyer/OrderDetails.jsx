@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { orderApi } from '../../api/orderApi';
 import Loading from '../../components/common/Loading';
@@ -12,20 +12,21 @@ const OrderDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchOrder();
-  }, [id]);
-
-  const fetchOrder = async () => {
+  const fetchOrder = useCallback(async () => {
     try {
       const response = await orderApi.getBuyerOrderById(id);
       setOrder(response.data);
+      setError('');
     } catch (err) {
       setError('Failed to load order details');
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchOrder();
+  }, [fetchOrder]);
 
   const handleCancel = async () => {
     if (!window.confirm('Are you sure you want to cancel this order?')) return;

@@ -1,3 +1,4 @@
+// src/pages/farmer/MyProducts.jsx - FIXED DELETE FUNCTIONALITY
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { productApi } from '../../api/productApi';
@@ -29,25 +30,26 @@ const MyProducts = () => {
     navigate(`/farmer/products/edit/${product.id}`);
   };
 
+  // ✅ FIXED: Properly implemented delete function
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this product?')) return;
+    if (!window.confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
+      return;
+    }
 
     try {
       await productApi.deleteProduct(id);
+      alert('Product deleted successfully!');
+      // Refresh the product list after deletion
       fetchProducts();
     } catch (err) {
-      alert('Failed to delete product');
+      console.error('Delete error:', err);
+      const errorMessage = err.response?.data?.message || 'Failed to delete product';
+      alert(errorMessage);
     }
   };
 
-  const handleToggle = async (product) => {
-    try {
-      await productApi.toggleProductStatus(product.id);
-      fetchProducts();
-    } catch (err) {
-      alert('Failed to update product status');
-    }
-  };
+  // ✅ REMOVED: toggleProductStatus function (not implemented in backend)
+  // If you want to add active/inactive toggle later, you need to add it to the backend first
 
   if (loading) return <Loading />;
 
@@ -78,7 +80,7 @@ const MyProducts = () => {
               showActions={true}
               onEdit={handleEdit}
               onDelete={handleDelete}
-              onToggle={handleToggle}
+              // ✅ REMOVED onToggle prop since backend doesn't support it
             />
           ))}
         </div>

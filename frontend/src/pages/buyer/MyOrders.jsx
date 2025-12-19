@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { orderApi } from '../../api/orderApi';
 import OrderCard from '../../components/order/OrderCard';
 import Loading from '../../components/common/Loading';
@@ -9,20 +9,22 @@ const MyOrders = () => {
   const [error, setError] = useState('');
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    fetchOrders();
-  }, [filter]);
-
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
+    setLoading(true);
     try {
       const response = await orderApi.getBuyerOrders(filter);
       setOrders(response.data);
+      setError('');
     } catch (err) {
       setError('Failed to load orders');
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter]);
+
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
   if (loading) return <Loading />;
 
@@ -66,7 +68,7 @@ const MyOrders = () => {
       ) : (
         <div className="grid grid-2">
           {orders.map(order => (
-            <OrderCard key={order.id} order={order} userRole="BUYER" />
+            <OrderCard key={order.id} order={order} userRole="BUYER" onUpdate={fetchOrders} />
           ))}
         </div>
       )}

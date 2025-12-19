@@ -1,3 +1,4 @@
+// src/pages/buyer/BuyerDashboard.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { orderApi } from '../../api/orderApi';
@@ -25,13 +26,15 @@ const BuyerDashboard = () => {
     }
   };
 
-  if (loading) return (
-    <div className="container">
-      <div className="loading-container">
-        <Loading />
+  if (loading) {
+    return (
+      <div className="container">
+        <div className="loading-container">
+          <Loading />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 
   if (error) {
     return (
@@ -42,61 +45,67 @@ const BuyerDashboard = () => {
   }
 
   return (
-    <div className="container">
-      <div className="dashboard-header">
-        <h1>Buyer Dashboard</h1>
-        <Link to="/products" className="btn btn-primary">
-          Browse Products
-        </Link>
-      </div>
-
-      <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-icon">📦</div>
-          <div className="stat-content">
-            <h3>{stats?.totalOrders || 0}</h3>
-            <p>Total Orders</p>
-          </div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-icon">⏳</div>
-          <div className="stat-content">
-            <h3>{stats?.pendingOrders || 0}</h3>
-            <p>Pending Orders</p>
-          </div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-icon">✅</div>
-          <div className="stat-content">
-            <h3>{stats?.completedOrders || 0}</h3>
-            <p>Completed Orders</p>
-          </div>
-        </div>
-
-        <div className="stat-card">
-          <div className="stat-icon">💰</div>
-          <div className="stat-content">
-            <h3>{formatCurrency(stats?.totalSpent || 0)}</h3>
-            <p>Total Spent</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="dashboard-actions">
-        <h2 className="section-title">Quick Actions</h2>
-        <div className="actions-grid">
-          <Link to="/buyer/orders" className="action-card">
-            <div className="action-icon">📋</div>
-            <h3>View My Orders</h3>
-            <p>Track and manage your orders</p>
+    <div className="buyer-dashboard">
+      <div className="container">
+        {/* Header */}
+        <div className="dashboard-header">
+          <h1>Buyer Dashboard</h1>
+          <Link to="/products" className="btn btn-primary">
+            Browse Products
           </Link>
-          <Link to="/products" className="action-card">
-            <div className="action-icon">🛒</div>
-            <h3>Browse Products</h3>
-            <p>Find fresh produce from local farmers</p>
-          </Link>
+        </div>
+
+        {/* Statistics Cards */}
+        <div className="stats-grid">
+          <div className="stat-card">
+            <div className="stat-icon">📦</div>
+            <div className="stat-content">
+              <h3>{stats?.totalOrders || 0}</h3>
+              <p>TOTAL ORDERS</p>
+            </div>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-icon">⏳</div>
+            <div className="stat-content">
+              <h3>{stats?.pendingOrders || 0}</h3>
+              <p>PENDING ORDERS</p>
+            </div>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-icon">✅</div>
+            <div className="stat-content">
+              <h3>{stats?.completedOrders || 0}</h3>
+              <p>COMPLETED ORDERS</p>
+            </div>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-icon">💰</div>
+            <div className="stat-content">
+              <h3>{formatCurrency(stats?.totalSpent || 0)}</h3>
+              <p>TOTAL SPENT</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions Section */}
+        <div className="quick-actions-section">
+          <h2 className="section-title">Quick Actions</h2>
+          <div className="quick-actions-grid">
+            <Link to="/buyer/orders" className="action-card">
+              <div className="action-icon">📋</div>
+              <h3>View My Orders</h3>
+              <p>Track and manage your orders</p>
+            </Link>
+
+            <Link to="/products" className="action-card">
+              <div className="action-icon">🛒</div>
+              <h3>Browse Products</h3>
+              <p>Find fresh produce from local farmers</p>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

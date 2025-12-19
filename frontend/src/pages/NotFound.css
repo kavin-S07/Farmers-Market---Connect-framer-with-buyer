@@ -1,0 +1,344 @@
+/* NotFound.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.not-found-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.farmfresh-banner {
+  text-align: center;
+  margin-bottom: 40px;
+  z-index: 10;
+  position: relative;
+}
+
+.farmfresh-title {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #28a745;
+  margin-bottom: 10px;
+  text-shadow:
+    0 0 10px rgba(40, 167, 69, 0.5),
+    0 0 20px rgba(40, 167, 69, 0.3),
+    0 0 30px rgba(40, 167, 69, 0.1);
+  letter-spacing: 2px;
+  animation: titleGlow 3s infinite alternate;
+}
+
+@keyframes titleGlow {
+  from {
+    text-shadow:
+      0 0 10px rgba(40, 167, 69, 0.5),
+      0 0 20px rgba(40, 167, 69, 0.3);
+  }
+  to {
+    text-shadow:
+      0 0 20px rgba(40, 167, 69, 0.8),
+      0 0 30px rgba(40, 167, 69, 0.6),
+      0 0 40px rgba(40, 167, 69, 0.4);
+  }
+}
+
+.banner-subtitle {
+  font-size: 1.5rem;
+  color: #fff;
+  opacity: 0.8;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.block404 {
+  position: relative;
+  background-image: url(https://imgur.com/eHVyWTM.jpg);
+  width: 100%;
+  max-width: 1248px;
+  height: 620px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow:
+    0 0 50px rgba(40, 167, 69, 0.2),
+    0 0 100px rgba(40, 167, 69, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.block404:hover {
+  transform: scale(1.01);
+}
+
+.t404 {
+  position: absolute;
+  width: 364px;
+  height: 146px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(https://imgur.com/KPZo9YX.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.5s forwards;
+}
+
+.obj {
+  width: 204px;
+  height: 209px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: animation-404 6s infinite ease-in-out;
+  z-index: 3;
+  opacity: 0;
+  animation:
+    fadeIn 1s ease 0.3s forwards,
+    animation-404 6s infinite ease-in-out;
+}
+
+.obj img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(40, 167, 69, 0.7));
+}
+
+@keyframes animation-404 {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  50% {
+    transform: translate(-53%, -42%) rotate(-5deg);
+  }
+}
+
+.waves {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(https://imgur.com/eHVyWTM.jpg);
+  background-size: cover;
+  background-position: center;
+  filter: url("#glitch");
+  z-index: 1;
+}
+
+.error-content {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 4;
+  opacity: 0;
+  animation: slideUp 1s ease 1s forwards;
+}
+
+.page-not-found {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.error-description {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 30px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.go-home-btn {
+  display: inline-block;
+  padding: 15px 40px;
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow:
+    0 5px 20px rgba(40, 167, 69, 0.4),
+    0 0 0 2px rgba(40, 167, 69, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.go-home-btn:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 30px rgba(40, 167, 69, 0.6),
+    0 0 0 2px rgba(40, 167, 69, 0.4);
+  background: linear-gradient(45deg, #23923d, #1ba57c);
+}
+
+.go-home-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.go-home-btn:hover::before {
+  left: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects for glitch intensity */
+.block404:hover .waves {
+  filter: url("#glitch") brightness(1.1);
+}
+
+.block404:hover .obj {
+  animation-duration: 4s;
+}
+
+/* Responsive Design */
+@media (max-width: 1300px) {
+  .block404 {
+    height: 500px;
+  }
+
+  .farmfresh-title {
+    font-size: 3rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .block404 {
+    height: 400px;
+  }
+
+  .t404 {
+    width: 250px;
+    height: 100px;
+  }
+
+  .obj {
+    width: 150px;
+    height: 154px;
+  }
+
+  .farmfresh-title {
+    font-size: 2.5rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .page-not-found {
+    font-size: 2rem;
+  }
+
+  .error-description {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+
+  .go-home-btn {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .block404 {
+    height: 300px;
+  }
+
+  .t404 {
+    width: 180px;
+    height: 72px;
+  }
+
+  .obj {
+    width: 100px;
+    height: 102px;
+  }
+
+  .farmfresh-title {
+    font-size: 2rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1rem;
+  }
+
+  .page-not-found {
+    font-size: 1.5rem;
+  }
+
+  .error-content {
+    bottom: 20px;
+  }
+}
+
+/* Background particles */
+.not-found-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(40, 167, 69, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(32, 201, 151, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(40, 167, 69, 0.05) 0%, transparent 50%);
+  z-index: -1;
+}

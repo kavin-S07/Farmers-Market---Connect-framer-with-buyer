@@ -1,0 +1,139 @@
+/* src/pages/buyer/ProductDetailPage.css */
+.product-detail-page {
+  padding: 20px 0;
+}
+
+.product-detail-container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.product-detail-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-detail-info-section h1 {
+  font-size: 2rem;
+  color: #333;
+  margin: 0;
+}
+
+.product-detail-price {
+  font-size: 2rem;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.product-detail-price .unit {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: normal;
+}
+
+.product-detail-stock {
+  font-size: 1rem;
+  color: #666;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.product-detail-description {
+  padding: 20px 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.product-detail-description h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-detail-description p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.product-detail-farmer {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.product-detail-farmer h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-detail-farmer p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.product-detail-order {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.quantity-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quantity-selector label {
+  font-weight: 600;
+  color: #333;
+}
+
+.order-total {
+  font-size: 1.5rem;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.btn-lg {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .product-detail-container {
+    padding: 30px 20px;
+  }
+
+  .product-detail-info-section h1 {
+    font-size: 1.6rem;
+  }
+
+  .product-detail-price {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-detail-container {
+    padding: 20px 15px;
+  }
+
+  .product-detail-info-section h1 {
+    font-size: 1.4rem;
+  }
+
+  .product-detail-price {
+    font-size: 1.4rem;
+  }
+}

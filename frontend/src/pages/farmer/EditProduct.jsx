@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { productApi } from '../../api/productApi';
 import ProductForm from '../../components/product/ProductForm';
@@ -11,11 +11,7 @@ const EditProduct = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    fetchProduct();
-  }, [id]);
-
-  const fetchProduct = async () => {
+  const fetchProduct = useCallback(async () => {
     try {
       const response = await productApi.getFarmerProduct(id);
       setProduct(response.data);
@@ -25,7 +21,11 @@ const EditProduct = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, navigate]);
+
+  useEffect(() => {
+    fetchProduct();
+  }, [fetchProduct]);
 
   const handleSubmit = async (formData) => {
     setSubmitting(true);

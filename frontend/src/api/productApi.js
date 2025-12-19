@@ -1,3 +1,4 @@
+// src/api/productApi.js - CLEANED UP VERSION
 import axios from './axiosConfig';
 
 export const productApi = {
@@ -12,6 +13,8 @@ export const productApi = {
   getFarmerProduct: (id) => axios.get(`/farmer/products/${id}`),
   updateProduct: (id, data) => axios.put(`/farmer/products/${id}`, data),
   deleteProduct: (id) => axios.delete(`/farmer/products/${id}`),
+  
+  // ✅ Image upload (if you implement it later)
   uploadProductImage: (id, file) => {
     const formData = new FormData();
     formData.append('file', file);
@@ -19,5 +22,9 @@ export const productApi = {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
   },
-  toggleProductStatus: (id) => axios.patch(`/farmer/products/${id}/toggle`),
+  
+  // ✅ REMOVED: toggleProductStatus - Not implemented in backend
+  // If you need this feature, add it to the backend first:
+  // @PatchMapping("/products/{id}/toggle")
+  // public ResponseEntity<ProductResponse> toggleProductStatus(...)
 };

@@ -4,6 +4,7 @@ import { orderApi } from '../../api/orderApi';
 import Loading from '../../components/common/Loading';
 import { formatCurrency, formatDate } from '../../utils/helpers';
 import { ORDER_STATUS_LABELS, ORDER_STATUS_COLORS } from '../../utils/constants';
+import './OrderDetails.css'; // Import CSS file
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -80,7 +81,7 @@ const OrderDetails = () => {
 
   if (error) {
     return (
-      <div className="container">
+      <div className="container order-details-page">
         <button onClick={() => navigate('/farmer/orders')} className="btn btn-secondary mb-2">
           ← Back to Orders
         </button>
@@ -93,7 +94,7 @@ const OrderDetails = () => {
 
   if (!order) {
     return (
-      <div className="container">
+      <div className="container order-details-page">
         <button onClick={() => navigate('/farmer/orders')} className="btn btn-secondary mb-2">
           ← Back to Orders
         </button>
@@ -103,76 +104,95 @@ const OrderDetails = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container order-details-page">
       <button onClick={() => navigate('/farmer/orders')} className="btn btn-secondary mb-2">
-        ← Back
+        ← Back to Orders
       </button>
 
-      <div className="card">
-        <div className="flex-between mb-2">
-          <h2>Order #{order.id}</h2>
+      <div className="order-details-container">
+        <div className="order-details-header">
+          <h1>Order #{order.id}</h1>
           <span className={`badge badge-${ORDER_STATUS_COLORS[order.status]}`}>
             {ORDER_STATUS_LABELS[order.status]}
           </span>
         </div>
 
-        <p><strong>Order Date:</strong> {formatDate(order.createdAt)}</p>
-
-        <hr />
-
-        <h3>Buyer Information</h3>
-        <p><strong>Name:</strong> {order.buyerName || "Not Provided"}</p>
-        <p><strong>Phone:</strong> {order.buyerPhone || "Not Provided"}</p>
-        <p><strong>State:</strong> {order.buyerState || "Not Provided"}</p>
-        <p><strong>District:</strong> {order.buyerDistrict || "Not Provided"}</p>
-        <p><strong>Email:</strong> {order.buyerPhone || "Not Provided"}</p>
-        <p><strong>Address:</strong> {order.buyerAddress || "Not Provided"}</p>
-
-        <hr />
-
-        <h3>Order Items</h3>
-        <table style={{ width: '100%', marginTop: '10px' }}>
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {order.items?.map(item => (
-              <tr key={item.id}>
-                <td>{item.productName}</td>
-                <td>{item.quantity}</td>
-                <td>{formatCurrency(item.priceEach)}</td>
-                <td>{formatCurrency(item.subtotal)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <div style={{ textAlign: 'right', marginTop: '20px' }}>
-          <h3>Total: {formatCurrency(order.totalAmount)}</h3>
+        <div className="order-details-meta">
+          <p><strong>Order Date:</strong> {formatDate(order.createdAt)}</p>
         </div>
 
-        <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-          {order.status === 'PENDING' && (
-            <>
-              <button onClick={handleConfirm} className="btn btn-success">
-                ✓ Confirm Order
-              </button>
-              <button onClick={handleReject} className="btn btn-danger">
-                ✗ Reject Order
-              </button>
-            </>
-          )}
-          {order.status === 'CONFIRMED' && (
-            <button onClick={handleComplete} className="btn btn-primary">
+        <hr />
+
+        <div className="order-details-section">
+          <h3>Buyer Information</h3>
+          <div className="info-grid">
+            <div className="info-item">
+              <strong>Name:</strong> {order.buyerName || "Not Provided"}
+            </div>
+            <div className="info-item">
+              <strong>Phone:</strong> {order.buyerPhone || "Not Provided"}
+            </div>
+            <div className="info-item">
+              <strong>State:</strong> {order.buyerState || "Not Provided"}
+            </div>
+            <div className="info-item">
+              <strong>District:</strong> {order.buyerDistrict || "Not Provided"}
+            </div>
+            <div className="info-item">
+              <strong>Email:</strong> {order.buyerEmail || "Not Provided"}
+            </div>
+            <div className="info-item">
+              <strong>Address:</strong> {order.buyerAddress || "Not Provided"}
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div className="order-details-section">
+          <h3>Order Items</h3>
+          <div className="order-items-table">
+            <div className="table-header">
+              <div className="table-col">Product</div>
+              <div className="table-col">Quantity</div>
+              <div className="table-col">Price</div>
+              <div className="table-col">Subtotal</div>
+            </div>
+            {order.items?.map(item => (
+              <div className="table-row" key={item.id}>
+                <div className="table-col">{item.productName}</div>
+                <div className="table-col">{item.quantity} {item.unit}</div>
+                <div className="table-col">{formatCurrency(item.priceEach)}</div>
+                <div className="table-col">{formatCurrency(item.subtotal)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="order-total-section">
+          <div className="order-total">
+            <strong>Total Amount:</strong> {formatCurrency(order.totalAmount)}
+          </div>
+        </div>
+
+        {order.status === 'PENDING' && (
+          <div className="order-actions">
+            <button onClick={handleConfirm} className="btn btn-success btn-lg">
+              ✓ Confirm Order
+            </button>
+            <button onClick={handleReject} className="btn btn-danger btn-lg">
+              ✗ Reject Order
+            </button>
+          </div>
+        )}
+
+        {order.status === 'CONFIRMED' && (
+          <div className="order-actions">
+            <button onClick={handleComplete} className="btn btn-primary btn-lg">
               ✓ Mark as Completed
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

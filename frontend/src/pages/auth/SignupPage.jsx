@@ -4,7 +4,9 @@ import './AuthPage.css';
 
 const SignupPage = () => {
   return (
-    <SignupForm />
+    <div className="auth-page">
+      <SignupForm />
+    </div>
   );
 };
 
