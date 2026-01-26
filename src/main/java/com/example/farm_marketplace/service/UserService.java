@@ -76,13 +76,6 @@ public class UserService {
     }
 
     /**
-     * Check if email exists
-     */
-    public boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
-    }
-
-    /**
      * Map User entity to UserResponse DTO
      */
     private UserResponse mapToResponse(User user) {
