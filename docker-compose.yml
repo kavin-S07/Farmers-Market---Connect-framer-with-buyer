@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    container_name: farm-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=jdbc:postgresql://ep-raspy-sea-a47bgdk5-pooler.us-east-1.aws.neon.tech:5432/neondb?sslmode=require
+      - DB_USERNAME=neondb_owner
+      - DB_PASSWORD=npg_mu7otdV3FCEZ
+      - JWT_SECRET=this is farmer and buyer web application developed by kavin
+    volumes:
+      - uploads-data:/app/uploads
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: farm-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  uploads-data:
